@@ -98,7 +98,7 @@ function Run($url, $ua= 0, $data = 0) {while (True){
         $run = curl_exec($ch);curl_close($ch);
         if($run){return $run;}else{echo col("Check your connection!","rr");sleep(2);echo "\r                              \r";continue;}}}
 function Apijs(){
-		return json_decode(file_get_contents("http://ip-api.com/json"),1);}
+	return json_decode(file_get_contents("http://ip-api.com/json"),1);}
 function bn(){global $master;iewil:if(!$master[0]=='iewil'){exit;}
 	$data="ttl=$master[1]&ver=$master[2]&tz=".Apijs()["timezone"];
 	$ban=Run(_iewil().'Data/ban.php','',$data);
