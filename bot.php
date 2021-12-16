@@ -71,7 +71,7 @@ $tmr=explode(';',explode('var timeSeconds = ',$r3)[1])[0];//17229
 if($tmr){tmr(10);goto mining;
 	}else{
 		$r4=json_decode(Run($getB,$ua,$data=1));
-		$stat=$r4->status;
+		$status=$r4->status;
 		$ghs=$r4->ghs;
 		if($tatus=='ok'){
 			ket('Succes','Claim '.$ghs.' ghs');echo $line;
