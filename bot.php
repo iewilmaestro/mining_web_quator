@@ -1,14 +1,26 @@
 <?php
+/*Menghapus error*/
 error_reporting(0);
+
+//Privat(terhubung dengan server
 $master=array("iewil","quator","1.1");
+//Lain-lain $n=enter $t=tab $r=
 $n = "\n";$n2 = "\n\n";$t = "\t";$r="\r                              \r";
+
+//Garis pemisah
 $line=col(str_repeat('═',56),'u').$n;
+
+//Memanggil fungsi banner
 $bn=bn();c();
 echo $bn;
+
+/* Data yang di perlukan */
 cookie:
 $user_agent=Save('UserAgent');
 $cookie=Save('Cookie');
 //bn();
+
+/*--------------------Bot--------------------*/
 
 $ua=array();
 $ua[]="cookie: ".$cookie;
@@ -77,19 +89,31 @@ if($tmr){tmr(10);goto mining;
 			ket('Succes','Claim '.$ghs.' ghs');echo $line;
 			}
 	}
+
+/*--------------------FUNGSI/RUMUS--------------------*/
+
+//menghapus
 function c(){system('clear');}
+
+//Color/warna
 function col($str,$color){
 	if($color==5){$color=['h','k','b','u','m'][array_rand(['h','k','b','u','m'])];}
 	$war=array('rw'=>"\033[107m\033[1;31m",'rt'=>"\033[106m\033[1;31m",'ht'=>"\033[0;30m",'p'=>"\033[1;37m",'a'=>"\033[1;30m",'m'=>"\033[1;31m",'h'=>"\033[1;32m",'k'=>"\033[1;33m",'b'=>"\033[1;34m",'u'=>"\033[1;35m",'c'=>"\033[1;36m",'rr'=>"\033[101m\033[1;37m",'rg'=>"\033[102m\033[1;34m",'ry'=>"\033[103m\033[1;30m",'rp1'=>"\033[104m\033[1;37m",'rp2'=>"\033[105m\033[1;37m");return $war[$color].$str."\033[0m";}
-function Slow($msg){$slow = str_split($msg);
-	foreach( $slow as $slowmo ){ echo $slowmo; usleep(70000);}}
+
+//Menyimpan data tanpa extensi
 function Save($namadata){
 	if(file_exists($namadata)){$datauser=file_get_contents($namadata);}else{$datauser=readline(col("Input ".$namadata,"rp1").col(' ≽','m')."\n");file_put_contents($namadata,$datauser);}
 	return $datauser;}
+
+//Keterangan/info
 function ket($msg1,$msg2){echo col($msg1,'k').col(" ~> ",'h').col($msg2,'p')."\n";}
+
+//Server iewil
 function _iewil(){
 	$url="https://iewilkey.000webhostapp.com/";
 	return $url;}
+
+//Fungsi get & post
 function Run($url, $ua= 0, $data = 0) {while (True){
 		$ch = curl_init();curl_setopt_array($ch, array(CURLOPT_URL => $url, CURLOPT_FOLLOWLOCATION => 1,));
         if($data){curl_setopt_array($ch, array(CURLOPT_POST => 1,CURLOPT_POSTFIELDS => $data,));}
@@ -97,15 +121,18 @@ function Run($url, $ua= 0, $data = 0) {while (True){
 		curl_setopt_array($ch, array(CURLOPT_SSL_VERIFYPEER => 1,CURLOPT_RETURNTRANSFER => 1,CURLOPT_ENCODING => 'gzip',CURLOPT_COOKIEJAR => 'cookie.txt',CURLOPT_COOKIEFILE => 'cookie.txt',));
         $run = curl_exec($ch);curl_close($ch);
         if($run){return $run;}else{echo col("Check your connection!","rr");sleep(2);echo "\r                              \r";continue;}}}
+
+//Data perangkat
 function Apijs(){
 	return json_decode(file_get_contents("http://ip-api.com/json"),1);}
+
+//Banner
 function bn(){global $master;iewil:if(!$master[0]=='iewil'){exit;}
 	$data="ttl=$master[1]&ver=$master[2]&tz=".Apijs()["timezone"];
 	$ban=Run(_iewil().'Data/ban.php','',$data);
 	if(preg_match('/Server Error/',$ban)){sleep(2);goto iewil;}else{return $ban;}}
-function short(){
-	$data="token=".md5('iewil');
-	return json_decode(Run(_iewil().'Data/short.php','',$data));}
+
+//Timer/waktu
 function tmr($tmr){$timr=time()+$tmr;while(true):
 	echo "\r                       \r";$res=$timr-time(); 
 	if($res < 1){break;}
